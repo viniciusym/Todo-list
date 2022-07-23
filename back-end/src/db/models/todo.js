@@ -21,5 +21,9 @@ const todo = (sequelize, DataTypes) => {
       allowNull: false,
       type: DataTypes.DATE
     }
-  })
+  });
+
+  return todo;
 }
+
+module.exports = todo;
