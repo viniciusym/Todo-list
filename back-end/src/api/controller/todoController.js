@@ -13,14 +13,15 @@ const todoController = {
     res.status(200).json(todos);
   },
   async edit(req, res) {
+    const { id } = req.params;
     const { body } = req;
-    await todoService.edit(body);
+    await todoService.edit(body, id);
 
     res.sendStatus(204);
   },
   async delete(req, res) {
-    const { body } = req;
-    await todoService.delete(body);
+    const { id } = req.params;
+    await todoService.delete(id);
 
     res.sendStatus(204);
   },

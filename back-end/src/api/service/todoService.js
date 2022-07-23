@@ -9,7 +9,7 @@ const todoService = {
     return todos;
   },
   async edit(todoChanges, id) {
-    await todo.create(todoChanges, { where: { id } });
+    await todo.update(todoChanges, { where: { id } });
   },
   async delete(id) {
     await todo.destroy({ where: { id } });
