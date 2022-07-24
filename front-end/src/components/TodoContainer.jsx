@@ -12,8 +12,10 @@ function TodoContainer({ todo }) {
   });
   const { setUpdate } = useContext(TodoContext);
 
+  const API_URL = process.env.REACT_APP_API_URL || 'localhost';
+
   const deleteTodo = async (todoId) => {
-    await axios.delete(`http://localhost:5000/todo/${todoId}`);
+    await axios.delete(`http://${API_URL}:5000/todo/${todoId}`);
     setUpdate(true);
   };
 
@@ -25,7 +27,7 @@ function TodoContainer({ todo }) {
   };
 
   const saveEditing = async (todoId, editChanges) => {
-    await axios.put(`http://localhost:5000/todo/${todoId}`, {
+    await axios.put(`http://${API_URL}:5000/todo/${todoId}`, {
       description: editChanges,
     });
     setEdit({ editing: false, todo: {} });
@@ -46,6 +48,7 @@ function TodoContainer({ todo }) {
           <input
             type="text"
             onChange={({ target }) => handleEditInput(target.value)}
+            defaultValue={edit.todo.description}
             value={edit.changes}
           />
           <button

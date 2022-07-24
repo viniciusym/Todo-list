@@ -9,9 +9,11 @@ function TodoPage() {
     setUpdate, todos, setTodos, update,
   } = useContext(TodoContext);
 
+  const API_URL = process.env.REACT_APP_API_URL || 'localhost';
+
   useEffect(() => {
     const getTodos = async () => {
-      const response = await axios.get('http://localhost:5000/todo');
+      const response = await axios.get(`http://${API_URL}:5000/todo`);
       const { data } = response;
       setTodos(data);
       setUpdate(false);

@@ -6,7 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "nodemon -r dotenv/config src/index.js",
-    "sequelize": "npx sequelize db:create && npx sequelize db:migrate"
+    "sequelize": "sequelize db:drop && sequelize db:create && sequelize db:migrate",
+    "start": "node src/index.js"
   },
   "keywords": [],
   "author": "",

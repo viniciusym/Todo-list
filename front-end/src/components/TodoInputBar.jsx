@@ -6,8 +6,10 @@ function TodoInputBar() {
   const [todoInput, setTodoInput] = useState('');
   const { setUpdate } = useContext(TodoContext);
 
+  const API_URL = process.env.REACT_APP_API_URL || 'localhost';
+
   const addNewTodo = async (todo) => {
-    await axios.post('http://localhost:5000/todo', {
+    await axios.post(`http://${API_URL}:5000/todo`, {
       description: todo,
     });
     setTodoInput('');
