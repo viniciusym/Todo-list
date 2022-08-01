@@ -1,0 +1,10 @@
+.main-container {
+  background-color: darkorchid;
+  display: flex;
+  width: 700px;
+  min-height: 700px;
+  flex-direction: column;
+  align-items: center;
+  margin-left: auto;
+  margin-right: auto;
+}

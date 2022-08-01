@@ -1,8 +1,9 @@
 import React, { useEffect, useContext } from 'react';
-import axios from 'axios';
-import TodoInputBar from '../components/TodoInputBar';
-import TodoContext from '../context/TodoContext';
-import TodoContainer from '../components/TodoContainer';
+import TodoInputBar from '../../components/TodoInputBar/TodoInputBar';
+import TodoContext from '../../context/TodoContext';
+import TodoContainer from '../../components/TodoContainer/TodoContainer';
+import styles from './TodoPage.module.css';
+import apiGetAllTodo from '../../api/apiGetAllTodo';
 
 function TodoPage() {
   const {
@@ -11,16 +12,15 @@ function TodoPage() {
 
   useEffect(() => {
     const getTodos = async () => {
-      const response = await axios.get('http://localhost:5000/todo');
-      const { data } = response;
-      setTodos(data);
+      const todosFromApi = await apiGetAllTodo();
+      setTodos(todosFromApi);
       setUpdate(false);
     };
     if (update) getTodos();
   }, [update]);
 
   return (
-    <div>
+    <div className={styles['main-container']}>
       <TodoInputBar />
       { todos.map((todo) => (
         <TodoContainer todo={todo} key={todo.id} />))}
