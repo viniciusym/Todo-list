@@ -7,11 +7,12 @@ import TodoProvider from './context/TodoProvider';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
+  // eslint-disable-next-line react/jsx-filename-extension
   <React.StrictMode>
     <TodoProvider>
       <App />
     </TodoProvider>
-  </React.StrictMode>
+  </React.StrictMode>,
 );
 
 // If you want to start measuring performance in your app, pass a function

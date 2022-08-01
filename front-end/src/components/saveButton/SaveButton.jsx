@@ -1,14 +1,16 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { RiSaveLine } from 'react-icons/ri';
+import styles from './saveButton.module.css';
 
 function SaveButton({ saveEditingFunction }) {
   return (
     <button
+      className={styles['save-button']}
       type="button"
       onClick={saveEditingFunction}
     >
-      <RiSaveLine />
+      <RiSaveLine size="24px" />
     </button>
   );
 }

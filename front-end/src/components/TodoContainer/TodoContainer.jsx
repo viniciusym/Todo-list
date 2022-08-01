@@ -1,5 +1,6 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useMemo, useState } from 'react';
 import PropTypes from 'prop-types';
+import dateFormat from 'dateformat';
 import TodoContext from '../../context/TodoContext';
 import styles from './todoContainer.module.css';
 import apiDeleteTodo from '../../api/apiDeleteTodo';
@@ -16,6 +17,10 @@ function TodoContainer({ todo }) {
     changes: '',
   });
   const { setUpdate } = useContext(TodoContext);
+
+  const formatedDateTime = useMemo(() => (
+    dateFormat(createdAt, 'mm/dd/yyyy HH:MM:ss')
+  ), [createdAt]);
 
   const deleteTodo = async () => {
     await apiDeleteTodo(id);
@@ -48,6 +53,7 @@ function TodoContainer({ todo }) {
         <div className={styles['todo-container']}>
           <input
             type="text"
+            className={styles['todo-container-edit-input']}
             onChange={({ target }) => handleEditInput(target.value)}
             defaultValue={edit.todo.description}
             value={edit.changes}
@@ -57,10 +63,14 @@ function TodoContainer({ todo }) {
       ) : (
         <div className={styles['todo-container']}>
           <div>
-            <p>{description}</p>
-            <p>{createdAt}</p>
+            <p className={styles['todo-container-description']}>
+              {description}
+            </p>
+            <p className={styles['todo-container-date']}>
+              {formatedDateTime}
+            </p>
           </div>
-          <div>
+          <div className={styles['todo-container-button']}>
             <DeleteTodo deleteTodoFunction={deleteTodo} />
             <EditButton startEditingFunction={startEditing} />
           </div>

@@ -1,9 +1,33 @@
 .todo-container {
-  background-color: red;
-  height: 80px;
+  background-color: rgb(107, 78, 110);
+  min-height: 100px;
+  border-radius: 20px;
   border: 1px black solid;
-  min-width: 500px;
+  width: 550px;
   display: flex;
   align-items: center;
   justify-content: space-between;
+  padding: 5px 30px;
+  margin: 10px 0;
+}
+
+.todo-container-description {
+  overflow-wrap: break-word;
+  font-weight: 500;
+  font-size: 18px;
+  max-width: 400px;
+}
+
+.todo-container-date {
+  font-weight: 200;
+  font-size: 12px;
+}
+
+.todo-container-edit-input {
+  width: 80%;
+  height: 35px;
+  border-radius: 8px;
+  outline: none;
+  border: none;
+  font-size: 18px;
 }
