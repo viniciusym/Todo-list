@@ -1,7 +1,12 @@
 import React, { useContext, useState } from 'react';
 import PropTypes from 'prop-types';
-import axios from 'axios';
-import TodoContext from '../context/TodoContext';
+import TodoContext from '../../context/TodoContext';
+import styles from './todoContainer.module.css';
+import apiDeleteTodo from '../../api/apiDeleteTodo';
+import apiEditTodo from '../../api/apiEditTodo';
+import SaveButton from '../saveButton/SaveButton';
+import DeleteTodo from '../deleteButton/DeleteButton';
+import EditButton from '../editButton/EditButton';
 
 function TodoContainer({ todo }) {
   const { description, createdAt, id } = todo;
@@ -12,24 +17,20 @@ function TodoContainer({ todo }) {
   });
   const { setUpdate } = useContext(TodoContext);
 
-  const API_URL = process.env.REACT_APP_API_URL || 'localhost';
-
-  const deleteTodo = async (todoId) => {
-    await axios.delete(`http://${API_URL}:5000/todo/${todoId}`);
+  const deleteTodo = async () => {
+    await apiDeleteTodo(id);
     setUpdate(true);
   };
 
-  const startEditing = (todoToEdit) => {
+  const startEditing = () => {
     setEdit({
       editing: true,
-      todo: todoToEdit,
+      todo,
     });
   };
 
-  const saveEditing = async (todoId, editChanges) => {
-    await axios.put(`http://${API_URL}:5000/todo/${todoId}`, {
-      description: editChanges,
-    });
+  const saveEditing = async () => {
+    await apiEditTodo(id, edit.changes);
     setEdit({ editing: false, todo: {} });
     setUpdate(true);
   };
@@ -43,37 +44,26 @@ function TodoContainer({ todo }) {
 
   return (
     <div id={id}>
-      { edit.editing ? (
-        <div>
+      {edit.editing ? (
+        <div className={styles['todo-container']}>
           <input
             type="text"
             onChange={({ target }) => handleEditInput(target.value)}
             defaultValue={edit.todo.description}
             value={edit.changes}
           />
-          <button
-            type="button"
-            onClick={() => saveEditing(id, edit.changes)}
-          >
-            save
-          </button>
+          <SaveButton saveEditingFunction={saveEditing} />
         </div>
       ) : (
-        <div>
-          <p>{ description }</p>
-          <p>{ createdAt }</p>
-          <button
-            type="button"
-            onClick={() => deleteTodo(id)}
-          >
-            delete
-          </button>
-          <button
-            type="button"
-            onClick={() => startEditing(todo)}
-          >
-            edit
-          </button>
+        <div className={styles['todo-container']}>
+          <div>
+            <p>{description}</p>
+            <p>{createdAt}</p>
+          </div>
+          <div>
+            <DeleteTodo deleteTodoFunction={deleteTodo} />
+            <EditButton startEditingFunction={startEditing} />
+          </div>
         </div>
       )}
     </div>
