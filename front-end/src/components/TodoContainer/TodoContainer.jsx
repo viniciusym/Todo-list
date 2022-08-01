@@ -8,9 +8,12 @@ import apiEditTodo from '../../api/apiEditTodo';
 import SaveButton from '../saveButton/SaveButton';
 import DeleteTodo from '../deleteButton/DeleteButton';
 import EditButton from '../editButton/EditButton';
+import apiChangeTodoState from '../../api/apiChangeTodoState';
 
 function TodoContainer({ todo }) {
-  const { description, createdAt, id } = todo;
+  const {
+    description, createdAt, id, done,
+  } = todo;
   const [edit, setEdit] = useState({
     editing: false,
     todo: {},
@@ -47,6 +50,11 @@ function TodoContainer({ todo }) {
     }));
   };
 
+  const changeTodoState = async () => {
+    await apiChangeTodoState(id, !done);
+    setUpdate(true);
+  };
+
   return (
     <div id={id}>
       {edit.editing ? (
@@ -61,8 +69,10 @@ function TodoContainer({ todo }) {
           <SaveButton saveEditingFunction={saveEditing} />
         </div>
       ) : (
-        <div className={styles['todo-container']}>
-          <div>
+        <div
+          className={styles['todo-container']}
+        >
+          <div onClick={changeTodoState}>
             <p className={styles['todo-container-description']}>
               {description}
             </p>
@@ -85,6 +95,7 @@ TodoContainer.propTypes = {
     description: PropTypes.string.isRequired,
     createdAt: PropTypes.string.isRequired,
     id: PropTypes.number.isRequired,
+    done: PropTypes.bool.isRequired,
   }).isRequired,
 };
 
