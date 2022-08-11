@@ -4,7 +4,7 @@ const StyledTodoDescription = styled.p`
   overflow-wrap: break-word;
   font-weight: 500;
   font-size: 18px;
-  max-width: 400px;
+  max-width: 350px;
 
   ${(props) => (
     props.done && css`

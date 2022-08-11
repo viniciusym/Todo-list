@@ -84,7 +84,9 @@ function TodoContainer({ todo }) {
               {done && <img src={check} alt="" /> }
             </StyledCheckbox>
             <div>
-              <StyledTodoDescription done={done}>
+              <StyledTodoDescription
+                done={done}
+              >
                 {description}
               </StyledTodoDescription>
               <p className={styles['todo-container-date']}>
