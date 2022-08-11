@@ -9,11 +9,14 @@ import SaveButton from '../saveButton/SaveButton';
 import DeleteTodo from '../deleteButton/DeleteButton';
 import EditButton from '../editButton/EditButton';
 import apiChangeTodoState from '../../api/apiChangeTodoState';
+import StyledCheckbox from '../styledComponents/StyledCheckbox';
+import check from '../../check.svg';
+import StyledTodoDescription from '../styledComponents/StyledTodoDescription';
 
 function TodoContainer({ todo }) {
   const { setUpdate } = useContext(TodoContext);
   const {
-    description, createdAt, id,
+    description, createdAt, id, done,
   } = todo;
   const [edit, setEdit] = useState({
     editing: false,
@@ -69,15 +72,21 @@ function TodoContainer({ todo }) {
         <div
           className={styles['todo-container']}
         >
-          <div>
-            <input
-              type="checkbox"
-              onChange={(e) => changeTodoState(e.target.checked)}
-            />
+          <div className={styles['todo-container-info-checkbox']}>
+            <StyledCheckbox>
+              <input
+                checked={done}
+                type="checkbox"
+                id="checkbox-state"
+                onChange={(e) => changeTodoState(e.target.checked)}
+                className={styles['todo-container-checkbox']}
+              />
+              {done && <img src={check} alt="" /> }
+            </StyledCheckbox>
             <div>
-              <p className={styles['todo-container-description']}>
+              <StyledTodoDescription done={done}>
                 {description}
-              </p>
+              </StyledTodoDescription>
               <p className={styles['todo-container-date']}>
                 {formatedDateTime}
               </p>
