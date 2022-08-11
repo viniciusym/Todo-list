@@ -4,6 +4,8 @@ import TodoContext from '../../context/TodoContext';
 import TodoContainer from '../../components/TodoContainer/TodoContainer';
 import styles from './TodoPage.module.css';
 import apiGetAllTodo from '../../api/apiGetAllTodo';
+import apiDeleteTodo from '../../api/apiDeleteTodo';
+import StyledDeleteDoneTodosButton from '../../components/styledComponents/StyledDeleteDoneTodosButton';
 
 function TodoPage() {
   const {
@@ -19,11 +21,24 @@ function TodoPage() {
     if (update) getTodos();
   }, [update]);
 
+  const handleDeleteDoneTodosButton = async () => {
+    const doneTodos = todos.filter((todo) => todo.done);
+
+    const deleteTodosPromises = doneTodos.map((todo) => apiDeleteTodo(todo.id));
+    await Promise.all(deleteTodosPromises);
+    setUpdate(true);
+  };
+
   return (
     <div className={styles['main-container']}>
       <TodoInputBar />
-      { todos.map((todo) => (
-        <TodoContainer todo={todo} key={todo.id} />))}
+      <div className={styles['main-container-todo-containers']}>
+        {todos.map((todo) => (
+          <TodoContainer todo={todo} key={todo.id} />))}
+      </div>
+      <StyledDeleteDoneTodosButton onClick={handleDeleteDoneTodosButton}>
+        clear done tasks
+      </StyledDeleteDoneTodosButton>
     </div>
   );
 }

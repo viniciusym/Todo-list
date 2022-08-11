@@ -31,3 +31,12 @@
   border: none;
   font-size: 18px;
 }
+
+.todo-container-info-checkbox {
+  display: flex;
+  align-items: center;
+}
+
+.todo-container-checkbox {
+  display: none;
+}

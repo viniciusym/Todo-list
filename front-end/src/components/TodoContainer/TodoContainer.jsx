@@ -1,4 +1,4 @@
-import React, { useContext, useMemo, useState } from 'react';
+import React, { useContext, useState, memo } from 'react';
 import PropTypes from 'prop-types';
 import dateFormat from 'dateformat';
 import TodoContext from '../../context/TodoContext';
@@ -8,19 +8,22 @@ import apiEditTodo from '../../api/apiEditTodo';
 import SaveButton from '../saveButton/SaveButton';
 import DeleteTodo from '../deleteButton/DeleteButton';
 import EditButton from '../editButton/EditButton';
+import apiChangeTodoState from '../../api/apiChangeTodoState';
+import StyledCheckbox from '../styledComponents/StyledCheckbox';
+import check from '../../check.svg';
+import StyledTodoDescription from '../styledComponents/StyledTodoDescription';
 
 function TodoContainer({ todo }) {
-  const { description, createdAt, id } = todo;
+  const { setUpdate } = useContext(TodoContext);
+  const {
+    description, createdAt, id, done,
+  } = todo;
   const [edit, setEdit] = useState({
     editing: false,
     todo: {},
     changes: '',
   });
-  const { setUpdate } = useContext(TodoContext);
-
-  const formatedDateTime = useMemo(() => (
-    dateFormat(createdAt, 'mm/dd/yyyy HH:MM:ss')
-  ), [createdAt]);
+  const formatedDateTime = dateFormat(createdAt, 'mm/dd/yyyy HH:MM:ss');
 
   const deleteTodo = async () => {
     await apiDeleteTodo(id);
@@ -47,6 +50,11 @@ function TodoContainer({ todo }) {
     }));
   };
 
+  const changeTodoState = async (isDone) => {
+    await apiChangeTodoState(id, isDone);
+    setUpdate(true);
+  };
+
   return (
     <div id={id}>
       {edit.editing ? (
@@ -61,14 +69,30 @@ function TodoContainer({ todo }) {
           <SaveButton saveEditingFunction={saveEditing} />
         </div>
       ) : (
-        <div className={styles['todo-container']}>
-          <div>
-            <p className={styles['todo-container-description']}>
-              {description}
-            </p>
-            <p className={styles['todo-container-date']}>
-              {formatedDateTime}
-            </p>
+        <div
+          className={styles['todo-container']}
+        >
+          <div className={styles['todo-container-info-checkbox']}>
+            <StyledCheckbox>
+              <input
+                checked={done}
+                type="checkbox"
+                id="checkbox-state"
+                onChange={(e) => changeTodoState(e.target.checked)}
+                className={styles['todo-container-checkbox']}
+              />
+              {done && <img src={check} alt="" /> }
+            </StyledCheckbox>
+            <div>
+              <StyledTodoDescription
+                done={done}
+              >
+                {description}
+              </StyledTodoDescription>
+              <p className={styles['todo-container-date']}>
+                {formatedDateTime}
+              </p>
+            </div>
           </div>
           <div className={styles['todo-container-button']}>
             <DeleteTodo deleteTodoFunction={deleteTodo} />
@@ -85,7 +109,8 @@ TodoContainer.propTypes = {
     description: PropTypes.string.isRequired,
     createdAt: PropTypes.string.isRequired,
     id: PropTypes.number.isRequired,
+    done: PropTypes.bool.isRequired,
   }).isRequired,
 };
 
-export default TodoContainer;
+export default memo(TodoContainer);
