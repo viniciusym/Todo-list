@@ -3,12 +3,16 @@
   min-height: 100px;
   border-radius: 20px;
   border: 1px black solid;
-  width: 550px;
+  width: 100%;
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding: 5px 30px;
   margin: 10px 0;
+}
+
+.todo-div {
+  width: 80%;
 }
 
 .todo-container-description {

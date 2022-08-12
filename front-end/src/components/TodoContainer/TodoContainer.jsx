@@ -56,7 +56,7 @@ function TodoContainer({ todo }) {
   };
 
   return (
-    <div id={id}>
+    <div id={id} className={styles['todo-div']}>
       {edit.editing ? (
         <div className={styles['todo-container']}>
           <input
