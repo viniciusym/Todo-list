@@ -8,6 +8,8 @@
 }
 
 .todo-input-button {
+  background-color: rgba(44, 56, 219, 0.986);
+  color: white;
   width: 15%;
   height: 40px;
   border-radius: 8px;

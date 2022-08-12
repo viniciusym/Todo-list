@@ -10,6 +10,8 @@ const StyledDeleteDoneTodosButton = styled.button`
   margin-top: 7.5px;
   margin-bottom: 7.5px;
   cursor: pointer;
+  background-color: rgba(219, 44, 44, 0.986);
+  color: white;
   box-shadow: 7px 6px 28px 1px rgba(0, 0, 0, 0.24);
   &:active {
     transform: scale(0.98);

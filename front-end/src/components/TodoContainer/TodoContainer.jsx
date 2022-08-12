@@ -83,7 +83,7 @@ function TodoContainer({ todo }) {
               />
               {done && <img src={check} alt="" /> }
             </StyledCheckbox>
-            <div>
+            <div className={styles['todo-container-info']}>
               <StyledTodoDescription
                 done={done}
               >

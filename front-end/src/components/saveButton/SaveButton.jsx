@@ -10,7 +10,7 @@ function SaveButton({ saveEditingFunction }) {
       type="button"
       onClick={saveEditingFunction}
     >
-      <RiSaveLine size="24px" />
+      <RiSaveLine size="24px" color="white" />
     </button>
   );
 }
