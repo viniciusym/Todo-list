@@ -10,7 +10,7 @@ function DeleteTodo({ deleteTodoFunction }) {
       type="button"
       onClick={() => deleteTodoFunction()}
     >
-      <RiDeleteBin4Line size="24px" color="white" />
+      <RiDeleteBin4Line size="24px" color="#D65A31" />
     </button>
   );
 }
