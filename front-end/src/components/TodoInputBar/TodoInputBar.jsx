@@ -24,6 +24,7 @@ function TodoInputBar() {
         value={todoInput}
         className={styles['todo-input']}
         onChange={(e) => setTodoInput(e.target.value)}
+        placeholder="Enter task"
       />
       <button
         type="button"

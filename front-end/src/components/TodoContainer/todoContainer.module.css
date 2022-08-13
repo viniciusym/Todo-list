@@ -1,5 +1,17 @@
+@keyframes append-animate {
+	from {
+		transform: scale(0);
+		opacity: 0;
+	}
+	to {
+		transform: scale(1);
+		opacity: 1;	
+	}
+}
+
 .todo-container {
-  background-color: rgb(107, 78, 110);
+  color: #393E46;
+  background-color: #EEEEEE;
   min-height: 100px;
   border-radius: 20px;
   border: 1px black solid;
@@ -9,17 +21,15 @@
   justify-content: space-between;
   padding: 5px 30px;
   margin: 10px 0;
+  animation: append-animate .2s linear;
 }
 
 .todo-div {
   width: 80%;
 }
 
-.todo-container-description {
-  overflow-wrap: break-word;
-  font-weight: 500;
-  font-size: 18px;
-  max-width: 400px;
+.todo-container-info {
+  max-width: 90%;
 }
 
 .todo-container-date {
@@ -28,15 +38,19 @@
 }
 
 .todo-container-edit-input {
+  color: #1a1c1f;
   width: 80%;
   height: 35px;
+  padding: 5px;
   border-radius: 8px;
   outline: none;
   border: none;
-  font-size: 18px;
+  font-size: 20px;
+  border: 1px solid #393E46;
 }
 
 .todo-container-info-checkbox {
+  width: 70%;
   display: flex;
   align-items: center;
 }

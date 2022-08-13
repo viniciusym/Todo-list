@@ -10,7 +10,7 @@ function EditButton({ startEditingFunction }) {
       type="button"
       onClick={() => startEditingFunction()}
     >
-      <RiEditLine size="24px" />
+      <RiEditLine size="24px" color="#D65A31" />
     </button>
   );
 }

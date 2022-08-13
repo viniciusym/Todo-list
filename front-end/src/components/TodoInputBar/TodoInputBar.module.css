@@ -1,13 +1,19 @@
 .todo-input {
+  color: #1a1c1f;
   width: 80%;
   height: 35px;
+  padding: 5px;
   border-radius: 8px;
   outline: none;
   border: none;
-  font-size: 18px;
+  font-size: 20px;
+  border: 1px solid #EEEEEE;
+  background-color: #EEEEEE;
 }
 
 .todo-input-button {
+  background-color: #D65A31;
+  color: #EEEEEE;
   width: 15%;
   height: 40px;
   border-radius: 8px;
@@ -16,6 +22,15 @@
   font-size: 18px;
   cursor: pointer;
   box-shadow: 7px 6px 28px 1px rgba(0, 0, 0, 0.24);
+}
+
+.todo-input-button:hover {
+  transform: scale(1.02);
+  box-shadow: 7px 6px 28px 1px rgba(0, 0, 0, 0.24);
+}
+.todo-input-button:active {
+  transform: scale(0.98);
+  box-shadow: 3px 2px 22px 1px rgba(0, 0, 0, 0.24);
 }
 
 .todo-input-button:active {
