@@ -22,12 +22,12 @@ Aplicação capaz de adicionar, editar, marca como concluida e remover tarefas.
 
 clonar este repositorio:
 ```bash
-git clone https://github.com/viniciusym/todo.git
+git clone https://github.com/viniciusym/Todo-list.git
 ```
 
 Acessar o repositorio clonado:
 ```bash
-cd todo
+cd Todo-list
 ```
 
 Iniciar aplicação com o Docker compose:
